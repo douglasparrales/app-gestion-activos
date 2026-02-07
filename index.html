@@ -1,198 +1,364 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Descarga | Assets - Sistema de Gestión de Activos</title>
-    <style>
-        /* --- ESTILOS BASE --- */
-        :root {
-            --primary-color: #1E88E5;
-            --primary-dark: #1565C0;
-            --text-main: #2D3436;
-            --text-secondary: #636E72;
-            --bg-light: #F8FAFC;
-            --white: #FFFFFF;
-            --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Assets &mdash; Sistema de Gesti&oacute;n de Activos</title>
+  <meta name="description" content="Descarga oficial de la aplicaci&oacute;n Assets para el control y trazabilidad de activos f&iacute;sicos empresariales." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Reset ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    /* ── Tokens ── */
+    :root {
+      --bg:          #f5f7fa;
+      --surface:     #ffffff;
+      --primary:     #1e3a5f;
+      --primary-hover:#17304f;
+      --accent:      #2196f3;
+      --text:        #1c2d40;
+      --text-muted:  #5f6e80;
+      --border:      #dce3eb;
+      --radius:      0.5rem;
+    }
 
-        body {
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--bg-light);
-            color: var(--text-main);
-            line-height: 1.6;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
 
-        /* --- CONTENEDOR PRINCIPAL --- */
-        .container {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
+    /* ── Header ── */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      height: 64px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
 
-        .card {
-            background: var(--white);
-            max-width: 500px;
-            width: 100%;
-            padding: 60px 40px;
-            border-radius: 20px;
-            box-shadow: var(--shadow);
-            text-align: center;
-            border: 1px solid rgba(226, 232, 240, 0.8);
-        }
+    .header-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      height: 100%;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
 
-        /* --- ELEMENTOS VISUALES --- */
-        .logo-placeholder {
-            width: 80px;
-            height: 80px;
-            background: var(--primary-color);
-            margin: 0 auto 30px;
-            border-radius: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 8px 20px rgba(30, 136, 229, 0.3);
-        }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--text);
+    }
 
-        .logo-placeholder svg {
-            width: 45px;
-            height: 45px;
-            fill: white;
-        }
+    .logo-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      background: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-        h1 {
-            font-size: 28px;
-            font-weight: 700;
-            color: var(--text-main);
-            margin-bottom: 12px;
-            letter-spacing: -0.5px;
-        }
+    .logo-icon svg { width: 16px; height: 16px; color: #fff; }
+    .logo-text { font-size: 1.125rem; font-weight: 700; }
+    .header-subtitle { font-size: 0.875rem; color: var(--text-muted); }
 
-        .description {
-            font-size: 16px;
-            color: var(--text-secondary);
-            margin-bottom: 40px;
-        }
+    /* ── Hero ── */
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 120px 24px 80px;
+      text-align: center;
+    }
 
-        /* --- BOTÓN DE ACCIÓN --- */
-        .download-btn {
-            display: inline-block;
-            background-color: var(--primary-color);
-            color: var(--white);
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 16px;
-            padding: 18px 40px;
-            border-radius: 12px;
-            transition: all 0.3s ease;
-            width: 100%;
-            box-shadow: 0 4px 14px rgba(30, 136, 229, 0.4);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      background: var(--surface);
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
 
-        .download-btn:hover {
-            background-color: var(--primary-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(30, 136, 229, 0.5);
-        }
+    .badge svg { width: 16px; height: 16px; color: var(--accent); flex-shrink: 0; }
 
-        .download-btn:active {
-            transform: translateY(0);
-        }
+    .hero h1 {
+      font-size: 2.75rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      line-height: 1.15;
+    }
 
-        /* --- PIE DE PÁGINA / NOTAS --- */
-        .footer-note {
-            margin-top: 35px;
-            font-size: 13px;
-            color: #94A3B8;
-            padding: 0 10px;
-        }
+    .hero .subtitle {
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      margin-top: 8px;
+    }
 
-        .security-badge {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            margin-top: 25px;
-            color: #64748B;
-            font-size: 14px;
-            font-weight: 500;
-        }
+    .hero .description {
+      max-width: 560px;
+      margin-top: 24px;
+      font-size: 1rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
 
-        .security-badge svg {
-            width: 16px;
-            height: 16px;
-            fill: #10B981; /* Verde éxito */
-        }
+    .download-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 40px;
+      padding: 16px 36px;
+      background: var(--primary);
+      color: #fff;
+      font-family: inherit;
+      font-size: 1.05rem;
+      font-weight: 600;
+      border: none;
+      border-radius: var(--radius);
+      text-decoration: none;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(30, 58, 95, 0.25);
+      transition: background 0.2s ease;
+    }
 
-        footer {
-            padding: 30px;
-            text-align: center;
-            font-size: 12px;
-            color: #94A3B8;
-        }
+    .download-btn:hover { background: var(--primary-hover); }
+    .download-btn:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+    .download-btn svg { width: 20px; height: 20px; }
 
-        /* --- RESPONSIVE --- */
-        @media (max-width: 480px) {
-            .card {
-                padding: 40px 25px;
-                box-shadow: none;
-                background: transparent;
-                border: none;
-            }
-            body {
-                background-color: var(--white);
-            }
-        }
-    </style>
+    .hero .note {
+      max-width: 420px;
+      margin-top: 20px;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ── Features ── */
+    .features {
+      background: var(--surface);
+      padding: 80px 24px;
+    }
+
+    .features-inner {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .features h2 {
+      text-align: center;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .features .features-subtitle {
+      text-align: center;
+      color: var(--text-muted);
+      margin-top: 12px;
+      font-size: 0.95rem;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 40px;
+      margin-top: 48px;
+    }
+
+    .feature-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      background: rgba(30, 58, 95, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .feature-icon svg { width: 24px; height: 24px; color: var(--primary); }
+
+    .feature-card h3 {
+      margin-top: 16px;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .feature-card p {
+      margin-top: 8px;
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      max-width: 260px;
+      line-height: 1.6;
+    }
+
+    /* ── Footer ── */
+    .footer {
+      border-top: 1px solid var(--border);
+      background: var(--surface);
+      padding: 40px 24px;
+      text-align: center;
+    }
+
+    .footer-secure {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+
+    .footer-secure svg { width: 16px; height: 16px; }
+
+    .footer-copy {
+      margin-top: 16px;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    /* ── Responsive ── */
+    @media (min-width: 640px) {
+      .features-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (min-width: 900px) {
+      .hero h1 { font-size: 3.5rem; }
+      .hero .subtitle { font-size: 1.35rem; }
+      .hero .description { font-size: 1.1rem; }
+      .features-grid { grid-template-columns: repeat(4, 1fr); }
+    }
+
+    @media (max-width: 600px) {
+      .header-subtitle { display: none; }
+    }
+  </style>
 </head>
 <body>
 
-    <div class="container">
-        <main class="card">
-            <div class="logo-placeholder">
-                <svg viewBox="0 0 24 24">
-                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
-                </svg>
-            </div>
-
-            <h1>Assets</h1>
-            <p class="description">
-                Optimice el control de su inventario corporativo. <br>
-                Gestión, trazabilidad y reportes en la palma de su mano.
-            </p>
-
-            <a href="TU_ENLACE_DE_EXPO_AQUI" class="download-btn">
-                Descargar Aplicación
-            </a>
-
-            <div class="security-badge">
-                <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-                Software Verificado
-            </div>
-
-            <p class="footer-note">
-                El enlace dirige a una plataforma oficial de distribución (EAS Build) para garantizar la seguridad e integridad de la aplicación móvil.
-            </p>
-        </main>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-inner">
+      <a href="#" class="logo">
+        <div class="logo-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9"/></svg>
+        </div>
+        <span class="logo-text">Assets</span>
+      </a>
+      <span class="header-subtitle">Sistema de Gesti&oacute;n de Activos</span>
     </div>
+  </header>
 
-    <footer>
-        &copy; 2026 Assets - Sistema de Gestión de Activos. <br>
-        Uso exclusivo para personal autorizado.
-    </footer>
+  <!-- Hero -->
+  <main>
+    <section class="hero">
+      <div class="badge">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z"/></svg>
+        Descarga oficial verificada
+      </div>
+
+      <h1>Assets</h1>
+      <p class="subtitle">Sistema de Gesti&oacute;n de Activos</p>
+
+      <p class="description">
+        Sistema para el control, trazabilidad y gesti&oacute;n integral de activos f&iacute;sicos. 
+        Inventario en tiempo real y escaneo QR  &mdash; todo desde su dispositivo m&oacute;vil.
+      </p>
+
+      <a href="https://expo.dev/accounts/gokudouglas/projects/gestion-activos/builds/081febd0-8fbb-4a79-8802-7d3c6b34d775" class="download-btn" rel="noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>
+        Descargar aplicaci&oacute;n
+      </a>
+
+      <p class="note">
+        El enlace dirige a una plataforma oficial de distribuci&oacute;n para garantizar 
+        la seguridad e integridad de la aplicaci&oacute;n.
+      </p>
+    </section>
+
+    <!-- Features -->
+    <section class="features">
+      <div class="features-inner">
+        <h2>Funcionalidades principales</h2>
+        <p class="features-subtitle">Todo lo que se necesita para gestionar activos de forma eficiente.</p>
+
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m20.25 7.5-.625 10.632a2.25 2.25 0 0 1-2.247 2.118H6.622a2.25 2.25 0 0 1-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125Z"/></svg>
+            </div>
+            <h3>Control de inventario</h3>
+            <p>Registre, clasifique y gestione todos sus activos f&iacute;sicos desde una &uacute;nica plataforma centralizada.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 0 1 3.75 9.375v-4.5ZM3.75 14.625c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5a1.125 1.125 0 0 1-1.125-1.125v-4.5ZM13.5 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 0 1 13.5 9.375v-4.5Z"/><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 6.75h.75v.75h-.75v-.75ZM6.75 16.5h.75v.75h-.75v-.75ZM16.5 6.75h.75v.75h-.75v-.75ZM13.5 13.5h.75v.75h-.75v-.75ZM13.5 19.5h.75v.75h-.75v-.75ZM19.5 13.5h.75v.75h-.75v-.75ZM19.5 19.5h.75v.75h-.75v-.75ZM16.5 16.5h.75v.75h-.75v-.75Z"/></svg>
+            </div>
+            <h3>Escaneo QR</h3>
+            <p>Identifique y acceda a la informaci&oacute;n de cualquier activo con solo escanear su c&oacute;digo QR.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"/></svg>
+            </div>
+            <h3>Ubicaci&oacute;n y trazabilidad</h3>
+            <p>Conozca la ubicaci&oacute;n actual e historial de movimientos de cada activo en tiempo real.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z"/></svg>
+            </div>
+            <h3>Reportes y an&aacute;lisis</h3>
+            <p>Genere reportes detallados para tomar decisiones informadas sobre sus recursos.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-secure">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z"/></svg>
+      Distribuci&oacute;n segura a trav&eacute;s de plataforma oficial
+    </div>
+    <p class="footer-copy">&copy; 2026 Assets &mdash; Sistema de Gesti&oacute;n de Activos. Todos los derechos reservados.</p>
+  </footer>
 
 </body>
 </html>
